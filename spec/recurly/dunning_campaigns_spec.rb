@@ -3,21 +3,17 @@ require "spec_helper"
 describe DunningCampaign do
   let(:campaign) { Recurly::DunningCampaign.find("abcdef1234567890") }
 
-  describe ".find" do
-    before do
-      stub_api_request :get, "dunning_campaigns/abcdef1234567890", "dunning_campaigns/show-200"
-    end
+  before do
+    stub_api_request :get, "dunning_campaigns/abcdef1234567890", "dunning_campaigns/show-200"
+  end
 
+  describe ".find" do
     it "returns a campaign when available" do
-      puts campaign
       campaign.must_be_instance_of(DunningCampaign)
     end
   end
 
   describe "plan bulk update" do
-    before do
-      stub_api_request :put, "https://api.recurly.com/v2/dunning_campaigns/abcdef1234567890/bulk_update", "dunning_campaigns/update-200"
-    end
     let(:plan1) {
       Plan.new(
         :plan_code                 => "gold",
@@ -53,10 +49,19 @@ describe DunningCampaign do
       )
     }
 
+    before do
+      stub_api_request :put, "dunning_campaigns/abcdef1234567890/bulk_update", "dunning_campaigns/update-200"
+    end
+
     it "should assign the dunning campaign to multiple plans" do
-      campaign.bulk_update([plan1.code, plan2.code]).must_equal(true)
-      plan1.dunning_campaign_id.must_equal(campaign.id_uuid)
-      plan2.dunning_campaign_id.must_equal(campaign.id_uuid)
+      campaign_id = campaign.id
+
+      updated_campaign = campaign.bulk_update([plan1.plan_code, plan2.plan_code])
+
+      updated_campaign.plans.size.must_equal(2)
+      updated_campaign.plans.each do |plan|
+        plan.dunning_campaign_id.must_equal(campaign_id)
+      end
     end
   end
 end

@@ -32,4 +32,5 @@ Content-Type: application/xml; charset=utf-8
       <updated_at type="datetime">2021-08-05T23:06:18Z</updated_at>
     </dunning_cycle>
   </dunning_cycles>
+  <a name="bulk_update" href="https://api.recurly.com/v2/dunning_campaigns/abcdef1234567890/bulk_update" method="put"/>
 </dunning_campaign>
