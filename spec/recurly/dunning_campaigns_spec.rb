@@ -54,13 +54,10 @@ describe DunningCampaign do
     end
 
     it "should assign the dunning campaign to multiple plans" do
-      campaign_id = campaign.id
+      plans = campaign.bulk_update([plan1.plan_code, plan2.plan_code])
 
-      updated_campaign = campaign.bulk_update([plan1.plan_code, plan2.plan_code])
-
-      updated_campaign.plans.size.must_equal(2)
-      updated_campaign.plans.each do |plan|
-        plan.dunning_campaign_id.must_equal(campaign_id)
+      plans.each do |plan|
+        plan.dunning_campaign_id.must_equal(campaign.id)
       end
     end
   end

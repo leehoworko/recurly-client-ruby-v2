@@ -3,7 +3,6 @@ module Recurly
   class DunningCampaign < Resource
     # @return [[DunningCycle], []]
     has_many :dunning_cycles
-    has_many :plans
 
     define_attribute_methods %w(
       id
@@ -15,7 +14,6 @@ module Recurly
       created_at
       updated_at
       deleted_at
-      plans
     )
 
     def bulk_update(plan_codes)
@@ -25,7 +23,17 @@ module Recurly
       node = builder.add_element 'plan_codes'
       plan_codes.each { |plan_code| node.add_element 'plan_code', plan_code }
 
-      reload follow_link(:bulk_update, :body => builder.to_s)
+      response = follow_link(:bulk_update, :body => builder.to_s)
+
+      collection = []
+
+      document = XML.new response.body
+      document.each_element('//plans/plan') do |el|
+        record = Recurly::Plan.from_xml el
+        collection << record
+      end
+
+      collection.freeze
     end
   end
 end
