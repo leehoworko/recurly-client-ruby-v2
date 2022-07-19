@@ -3,12 +3,12 @@ require 'spec_helper'
 describe GiftCard do
   let(:gift_card) {
     stub_api_request :get, 'gift_cards/2004005808969875135', 'gift_cards/show-200'
-    Recurly::GiftCard.find 2004005808969875135
+    RecurlyV2::GiftCard.find 2004005808969875135
   }
 
   let(:gift_cards) {
     stub_api_request :get, 'gift_cards', 'gift_cards/index-200'
-    Recurly::GiftCard.all
+    RecurlyV2::GiftCard.all
   }
 
   describe "#all" do
@@ -29,7 +29,7 @@ describe GiftCard do
 
   describe "#find" do
     it "should find a gift card" do
-      gift_card.must_be_instance_of Recurly::GiftCard
+      gift_card.must_be_instance_of RecurlyV2::GiftCard
     end
 
     it "should parse all the gift card fields" do
@@ -52,7 +52,7 @@ describe GiftCard do
 
       delivery = gift_card.delivery
 
-      delivery.must_be_instance_of Recurly::Delivery
+      delivery.must_be_instance_of RecurlyV2::Delivery
       delivery.method.must_equal "email"
       delivery.deliver_at.must_equal nil
       delivery.email_address.must_equal "john@example.com"
@@ -116,7 +116,7 @@ describe GiftCard do
         }
       end
       let(:gift_card) {
-        Recurly::GiftCard.new(
+        RecurlyV2::GiftCard.new(
           product_code: 'gift_card',
           currency: 'USD',
           unit_amount_in_cents: 2000,
@@ -167,8 +167,8 @@ describe GiftCard do
 
     describe "when adding a top level billing info" do
       let(:gift_card) {
-        Recurly::GiftCard.new(
-          billing_info: Recurly::BillingInfo.new(token_id: '1234')
+        RecurlyV2::GiftCard.new(
+          billing_info: RecurlyV2::BillingInfo.new(token_id: '1234')
         )
       }
 

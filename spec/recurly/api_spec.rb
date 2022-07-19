@@ -11,7 +11,7 @@ describe API do
 
     it "must properly handle cloudflare 502 errors" do
       stub_api_request(:any, 'endpoint', 'cloudflare_error')
-      proc { API.get 'endpoint' }.must_raise Recurly::API::GatewayError
+      proc { API.get 'endpoint' }.must_raise RecurlyV2::API::GatewayError
     end
   end
 end

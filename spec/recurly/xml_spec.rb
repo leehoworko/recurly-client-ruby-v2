@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe Recurly::XML do
+describe RecurlyV2::XML do
   describe ".initialize" do
     describe "when malformed XML is passed in" do
-      it "raises a Recurly::XML::ParseError" do
-        proc { Recurly::XML.new('<unclosed-root>') }.must_raise Recurly::XML::ParseError
+      it "raises a RecurlyV2::XML::ParseError" do
+        proc { RecurlyV2::XML.new('<unclosed-root>') }.must_raise RecurlyV2::XML::ParseError
       end
     end
   end
@@ -33,14 +33,14 @@ describe Recurly::XML do
           '<subscription><account><billing_info><vat_number>DE123456789</vat_number></billing_info></account></subscription>'
         ]
       ].each do |input, output|
-        Recurly::XML.filter(input).must_equal output
+        RecurlyV2::XML.filter(input).must_equal output
       end
     end
   end
 
   describe ".text" do
     before :each do
-      @sample_xml = Recurly::XML.new("<root><node>Text from node</node>Text from root</root>")
+      @sample_xml = RecurlyV2::XML.new("<root><node>Text from node</node>Text from root</root>")
     end
 
     it "should return the first child text node" do

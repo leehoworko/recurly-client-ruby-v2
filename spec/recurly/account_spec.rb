@@ -79,7 +79,7 @@ describe Account do
 
         shads = account.shipping_addresses.all
         shads.length.must_equal 1
-        shads.first.must_be_instance_of Recurly::ShippingAddress
+        shads.first.must_be_instance_of RecurlyV2::ShippingAddress
       end
     end
   end

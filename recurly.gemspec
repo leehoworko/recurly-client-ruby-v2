@@ -1,18 +1,18 @@
 $LOAD_PATH.unshift File.expand_path('../lib', __FILE__)
-require 'recurly/version'
+require 'recurly_v2/version'
 
 Gem::Specification.new do |s|
   s.name             = 'recurly-v2'
-  s.version          = Recurly::Version.to_s
-  s.summary          = 'Recurly API Client'
-  s.description      = 'An API client library for Recurly: https://recurly.com'
+  s.version          = RecurlyV2::Version.to_s
+  s.summary          = 'RecurlyV2 API Client'
+  s.description      = 'An API client library for RecurlyV2: https://recurly.com'
 
   s.files            = Dir['lib/**/*']
 
   s.extra_rdoc_files = %w(README.md)
   s.rdoc_options     = %w(--main README.md)
 
-  s.author           = 'Recurly'
+  s.author           = 'RecurlyV2'
   s.email            = 'support@recurly.com'
   s.homepage         = 'https://github.com/recurly/recurly-client-ruby'
   s.license          = 'MIT'

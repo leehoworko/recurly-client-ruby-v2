@@ -10,7 +10,7 @@ describe Money do
     end
 
     it "must instantiate with an integer representing a default currency" do
-      Recurly.default_currency = 'USD'
+      RecurlyV2.default_currency = 'USD'
       money = Money.new 1_00
       money.must_be_instance_of Money
       money[:USD].must_equal 1_00

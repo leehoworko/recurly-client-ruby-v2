@@ -58,7 +58,7 @@ XML
         stub_api_request :get, 'items/plastic_gloves', 'items/show-200'
         stub_request(:put, "https://api.recurly.com/v2/items/plastic_gloves").
         with(:body => "<item><name>Sleek Plastic Gloves</name></item>",
-          :headers => Recurly::API.headers).to_return(:status => 200, :body => "", :headers => {})
+          :headers => RecurlyV2::API.headers).to_return(:status => 200, :body => "", :headers => {})
         item.update_attributes({ name: 'Sleek Plastic Gloves' })
       end
     end

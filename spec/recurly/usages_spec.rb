@@ -28,7 +28,7 @@ describe Usage do
 
     it "must correctly build the pager for the usage endpoint" do
       pager.uri.must_equal "https://api.recurly.com/v2/subscriptions/abcdef1234567890/add_ons/marketing_email/usage"
-      pager.resource_class.must_equal Recurly::Usage
+      pager.resource_class.must_equal RecurlyV2::Usage
     end
 
     it "must support querying" do

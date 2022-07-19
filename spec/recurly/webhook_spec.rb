@@ -49,7 +49,7 @@ describe Webhook do
     it "must return ClosedInvoiceNotification instance" do
       Webhook.parse(request 'closed-invoice-notification').must_be_instance_of Webhook::ClosedInvoiceNotification
     end
-    
+
     it "must return ClosedInvoiceNotification instance (manual)" do
       Webhook.parse(request 'closed-invoice-notification-manual').must_be_instance_of Webhook::ClosedInvoiceNotification
     end
@@ -85,7 +85,7 @@ describe Webhook do
     it "must return NewInvoiceNotification instance" do
       Webhook.parse(request 'new-invoice-notification').must_be_instance_of Webhook::NewInvoiceNotification
     end
-    
+
     it "must return NewInvoiceNotification instance (manual)" do
       Webhook.parse(request 'new-invoice-notification-manual').must_be_instance_of Webhook::NewInvoiceNotification
     end
@@ -97,7 +97,7 @@ describe Webhook do
     it "must return PastDueInvoiceNotification instance" do
       Webhook.parse(request 'past-due-invoice-notification').must_be_instance_of Webhook::PastDueInvoiceNotification
     end
-    
+
     it "must return PastDueInvoiceNotification instance (manual)" do
       Webhook.parse(request 'past-due-invoice-notification-manual').must_be_instance_of Webhook::PastDueInvoiceNotification
     end
@@ -133,7 +133,7 @@ describe Webhook do
     it "must return SuccessfulPaymentNotification instance" do
       Webhook.parse(request 'successful-payment-notification').must_be_instance_of Webhook::SuccessfulPaymentNotification
     end
-    
+
     it "must return SuccessfulPaymentNotification instance (manual)" do
       Webhook.parse(request 'successful-payment-notification-manual').must_be_instance_of Webhook::SuccessfulPaymentNotification
     end
@@ -181,22 +181,22 @@ describe Webhook do
     it "must return NewShippingAddressNotification instance" do
       webhook = Webhook.parse(request 'new-shipping-address-notification')
       webhook.must_be_instance_of Webhook::NewShippingAddressNotification
-      webhook.account.must_be_instance_of Recurly::Account
-      webhook.shipping_address.must_be_instance_of Recurly::ShippingAddress
+      webhook.account.must_be_instance_of RecurlyV2::Account
+      webhook.shipping_address.must_be_instance_of RecurlyV2::ShippingAddress
     end
 
     it "must return UpdatedShippingAddressNotification instance" do
       webhook = Webhook.parse(request 'updated-shipping-address-notification')
       webhook.must_be_instance_of Webhook::UpdatedShippingAddressNotification
-      webhook.account.must_be_instance_of Recurly::Account
-      webhook.shipping_address.must_be_instance_of Recurly::ShippingAddress
+      webhook.account.must_be_instance_of RecurlyV2::Account
+      webhook.shipping_address.must_be_instance_of RecurlyV2::ShippingAddress
     end
 
     it "must return DeletedShippingAddressNotification instance" do
       webhook = Webhook.parse(request 'deleted-shipping-address-notification')
       webhook.must_be_instance_of Webhook::DeletedShippingAddressNotification
-      webhook.account.must_be_instance_of Recurly::Account
-      webhook.shipping_address.must_be_instance_of Recurly::ShippingAddress
+      webhook.account.must_be_instance_of RecurlyV2::Account
+      webhook.shipping_address.must_be_instance_of RecurlyV2::ShippingAddress
     end
 
     it "must return FraudInfoUpdatedNotification instance" do
